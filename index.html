@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional management project store for students.">
+  <meta name="keywords"
+    content="student projects, management system projects, source code, portfolio website, custom website">
+  <meta property="og:title" content="Code with JP | Student Project Store">
+  <meta property="og:description" content="Management projects, source code, custom websites and portfolios.">
+  <meta property="og:type" content="website">
+  <title>ManageX Projects | Student Project Store</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script
+    type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Code with JP","description":"Student management projects, source code, custom websites and portfolios."}</script>
+  <style>
+    :root {
+      --primary: #6d5dfc;
+      --dark: #0a1020;
+      --muted: #697386;
+      --soft: #f6f7fb
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: Inter, sans-serif;
+      color: var(--dark);
+      background: #fff
+    }
+
+    .navbar {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1030;
+      width: min(calc(100% - 48px), 1180px);
+      padding: 10px 0;
+      margin: 10px auto 0;
+      background: rgba(255, 255, 255, .94);
+      backdrop-filter: blur(14px);
+      border: 1px solid #e7e9f0 !important;
+      border-radius: 28px;
+      box-shadow: 0 10px 28px rgba(16, 24, 40, .12), 0 0 0 1px rgba(255, 255, 255, .5) inset;
+      transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(110deg, transparent 20%, rgba(109, 93, 252, .12) 45%, rgba(255, 255, 255, .45) 52%, transparent 70%);
+      background-size: 220% 100%;
+      animation: navShine 5s linear infinite
+    }
+
+    .navbar:not(.scrolled)::after {
+      background: linear-gradient(110deg, transparent 18%, rgba(109, 93, 252, .28) 42%, rgba(49, 198, 255, .25) 52%, rgba(191, 129, 255, .2) 60%, transparent 75%)
+    }
+
+    .navbar .container {
+      position: relative;
+      z-index: 1
+    }
+
+    .navbar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(16, 24, 40, .16), 0 0 18px rgba(109, 93, 252, .16)
+    }
+
+    .navbar.scrolled {
+      background: rgba(10, 16, 32, .96);
+      border-color: rgba(166, 156, 255, .4) !important;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .28), 0 0 22px rgba(109, 93, 252, .2)
+    }
+
+    .navbar.scrolled .brand,
+    .navbar.scrolled .nav-link {
+      color: #fff
+    }
+
+    .navbar.scrolled .navbar-toggler {
+      filter: invert(1)
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.08rem;
+      letter-spacing: -.02em
+    }
+
+    .navbar .nav-link {
+      font-size: .9rem;
+      font-weight: 600;
+      padding: .45rem .7rem !important;
+      transition: .25s
+    }
+
+    .navbar .nav-link:hover {
+      color: var(--primary);
+      transform: translateY(-2px)
+    }
+
+    .navbar .btn-main {
+      padding: 9px 15px;
+      font-size: .86rem
+    }
+
+    .brand i {
+      color: var(--primary)
+    }
+
+    .hero {
+      padding-top: 78px;
+      padding-bottom: 68px;
+      background: radial-gradient(circle at 78% 15%, rgba(109, 93, 252, .32), transparent 32%), linear-gradient(135deg, #091020, #17203a);
+      color: #fff;
+      padding: 145px 0 90px
+    }
+
+    .hero h1 {
+      font-weight: 800;
+      font-size: clamp(2.1rem, 4.5vw, 3.7rem);
+      letter-spacing: -.055em;
+      line-height: 1.03
+    }
+
+    .hero p {
+      color: #bac2d4;
+      font-size: 1.08rem;
+      max-width: 680px
+    }
+
+    .hero .btn {
+      padding-top: 10px !important;
+      padding-bottom: 10px !important
+    }
+
+    .badge-soft {
+      background: rgba(109, 93, 252, .16);
+      color: #c8c2ff;
+      border: 1px solid rgba(109, 93, 252, .32)
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 0 24px
+    }
+
+    .hero-stat {
+      min-width: 142px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .07);
+      backdrop-filter: blur(8px)
+    }
+
+    .hero-stat strong {
+      display: block;
+      color: #c8c2ff;
+      font-size: 1.35rem;
+      line-height: 1.1
+    }
+
+    .hero-stat span {
+      font-size: .77rem;
+      color: #c5ccdb;
+      font-weight: 600
+    }
+
+    .hero .container>* {
+      opacity: 0;
+      animation: heroReveal .75s cubic-bezier(.2, .8, .2, 1) forwards
+    }
+
+    .hero .container>span {
+      animation-delay: .15s
+    }
+
+    .hero .container>h1 {
+      animation-delay: .3s
+    }
+
+    .hero .container>p {
+      animation-delay: .48s
+    }
+
+    .hero .container>.d-flex {
+      animation-delay: .66s
+    }
+
+    .btn {
+      transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease
+    }
+
+    .btn:hover {
+      transform: translateY(-3px)
+    }
+
+    .btn-main {
+      background: var(--primary);
+      color: #fff;
+      border: 0;
+      padding: 12px 20px;
+      border-radius: 11px;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(109, 93, 252, .22)
+    }
+
+    .btn-main:hover {
+      background: #5948ed;
+      color: #fff
+    }
+
+    .section {
+      padding: 64px 0
+    }
+
+    .section-title {
+      font-weight: 800;
+      letter-spacing: -.035em
+    }
+
+    .section-sub {
+      color: var(--muted)
+    }
+
+    #projects {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fff 0%, #faf9ff 100%)
+    }
+
+    #projects::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      top: -180px;
+      left: -140px;
+      border-radius: 50%;
+      background: rgba(109, 93, 252, .12);
+      filter: blur(12px)
+    }
+
+    #projects::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      right: -150px;
+      bottom: -120px;
+      border-radius: 50%;
+      background: rgba(49, 198, 255, .09);
+      filter: blur(12px)
+    }
+
+    #projects .container {
+      position: relative;
+      z-index: 1
+    }
+
+    .projects-heading {
+      padding: 30px 22px;
+      background: rgba(255, 255, 255, .72);
+      border: 1px solid #e3dfff;
+      border-radius: 26px;
+      box-shadow: 0 14px 34px rgba(109, 93, 252, .08)
+    }
+
+    .projects-heading .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem)
+    }
+
+    #projects {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fff 0%, #faf9ff 100%)
+    }
+
+    #projects::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      top: -180px;
+      left: -140px;
+      border-radius: 50%;
+      background: rgba(109, 93, 252, .12);
+      filter: blur(12px)
+    }
+
+    #projects::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      right: -150px;
+      bottom: -120px;
+      border-radius: 50%;
+      background: rgba(49, 198, 255, .09);
+      filter: blur(12px)
+    }
+
+    #projects .container {
+      position: relative;
+      z-index: 1
+    }
+
+    .projects-heading {
+      padding: 30px 22px;
+      background: rgba(255, 255, 255, .72);
+      border: 1px solid #e3dfff;
+      border-radius: 26px;
+      box-shadow: 0 14px 34px rgba(109, 93, 252, .08)
+    }
+
+    .projects-heading .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem)
+    }
+
+    .technologies-panel {
+      display: inline-block;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, #f0eeff, #f9f9ff);
+      border: 1px solid #ddd8ff;
+      border-radius: 18px;
+      box-shadow: 0 9px 22px rgba(109, 93, 252, .1)
+    }
+
+    .technology-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: .72rem;
+      letter-spacing: .08em
+    }
+
+    .technology-label i {
+      font-size: 1rem
+    }
+
+    .filter-bar {
+      background: #fff;
+      border: 1px solid #e7e9f0;
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 8px 28px rgba(16, 24, 40, .05)
+    }
+
+    .filter-bar .input-group {
+      border: 1px solid #d8d2ff;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f7f6ff;
+      transition: border-color .25s ease, box-shadow .25s ease
+    }
+
+    .filter-bar .input-group:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(109, 93, 252, .12)
+    }
+
+    .filter-bar .input-group-text,
+    .filter-bar .form-control {
+      background: #f7f6ff
+    }
+
+    .filter-bar .form-control:focus {
+      box-shadow: none
+    }
+
+    .project-card {
+      border: 1px solid #e7e9f0;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 100%;
+      background: #fff;
+      transition: .25s;
+      box-shadow: 0 8px 28px rgba(16, 24, 40, .05)
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      background: #f4f2ff;
+      border-color: #b8afff;
+      box-shadow: 0 18px 45px rgba(109, 93, 252, .18)
+    }
+
+    .project-img {
+      height: 155px;
+      width: 100%;
+      object-fit: cover;
+      background: #eef0f7
+    }
+
+    .project-body {
+      padding: 16px
+    }
+
+    .project-card h4 {
+      font-size: 1rem;
+      line-height: 1.25
+    }
+
+    .project-card .btn {
+      padding: 5px 8px;
+      font-size: .72rem;
+      line-height: 1.2
+    }
+
+    .tag {
+      font-size: .73rem;
+      background: #efedff;
+      color: #5948ed;
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+      display: inline-block
+    }
+
+    .tag:hover {
+      transform: translateY(-2px);
+      background: var(--primary);
+      color: #fff
+    }
+
+    .price {
+      font-size: 1.3rem;
+      font-weight: 800
+    }
+
+    .sale-price {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap
+    }
+
+    .old-price {
+      color: #9299a8;
+      font-size: .78rem;
+      text-decoration: line-through;
+      font-weight: 600
+    }
+
+    .discount-badge {
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: #dff8e7;
+      color: #16813b;
+      font-size: .65rem;
+      font-weight: 800
+    }
+
+    .feature {
+      padding: 19px;
+      border: 1px solid #e7e9f0;
+      border-radius: 18px;
+      height: 100%;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      background: #f7f6ff;
+      border-color: #c8c2ff;
+      box-shadow: 0 14px 30px rgba(109, 93, 252, .13)
+    }
+
+    .feature i {
+      font-size: 1.6rem;
+      color: var(--primary)
+    }
+
+    .custom-project {
+      background: linear-gradient(135deg, #f1efff, #f8f9ff);
+      border: 1px solid #dcd7ff;
+      border-radius: 24px;
+      padding: 34px
+    }
+
+    .custom-project i {
+      font-size: 2.4rem;
+      color: var(--primary)
+    }
+
+    .custom-project .btn {
+      padding: 7px 14px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #6d5dfc, #8b7cff);
+      box-shadow: 0 9px 20px rgba(109, 93, 252, .25)
+    }
+
+    .custom-project .btn:hover {
+      background: linear-gradient(135deg, #5948ed, #7768ff);
+      box-shadow: 0 13px 26px rgba(109, 93, 252, .35)
+    }
+
+    .web-service {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #10172b, #202b52);
+      color: #fff
+    }
+
+    .web-service::before {
+      content: "";
+      position: absolute;
+      width: 440px;
+      height: 440px;
+      top: -240px;
+      right: -150px;
+      border-radius: 50%;
+      background: rgba(109, 93, 252, .36);
+      filter: blur(18px)
+    }
+
+    .web-service .container {
+      position: relative;
+      z-index: 1
+    }
+
+    .web-service .section-sub {
+      color: #bfc7dc
+    }
+
+    .web-service-card,
+    .web-step {
+      height: 100%;
+      padding: 21px;
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .07);
+      backdrop-filter: blur(8px);
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease
+    }
+
+    .web-service-card:hover,
+    .web-step:hover {
+      transform: translateY(-5px);
+      background: rgba(109, 93, 252, .2);
+      border-color: rgba(190, 184, 255, .65);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, .18)
+    }
+
+    .web-service-card i {
+      font-size: 1.55rem;
+      color: #b8b0ff
+    }
+
+    .web-step-number {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--primary);
+      font-size: .85rem;
+      font-weight: 800;
+      margin-bottom: 14px
+    }
+
+    .how {
+      background: linear-gradient(180deg, #f6f7fb, #f0eeff)
+    }
+
+    .how .col-md-3>.d-flex {
+      height: 100%;
+      padding: 20px 16px;
+      background: rgba(255, 255, 255, .78);
+      border: 1px solid #e1ddff;
+      border-radius: 18px;
+      box-shadow: 0 8px 22px rgba(16, 24, 40, .05);
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease
+    }
+
+    .how .col-md-3>.d-flex:hover {
+      transform: translateY(-6px);
+      background: #fff;
+      border-color: #aea3ff;
+      box-shadow: 0 16px 30px rgba(109, 93, 252, .16)
+    }
+
+    .step-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6d5dfc, #978cff);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      flex: 0 0 auto;
+      box-shadow: 0 8px 18px rgba(109, 93, 252, .28)
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, #10172b, #1b2440);
+      border-radius: 26px;
+      color: #fff;
+      padding: 43px
+    }
+
+    .whatsapp-float,
+    .telegram-float {
+      position: fixed;
+      right: 22px;
+      z-index: 1040;
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.55rem
+    }
+
+    .whatsapp-float {
+      bottom: 22px;
+      background: #25d366;
+      box-shadow: 0 12px 25px rgba(37, 211, 102, .36);
+      animation: whatsappPulse 2.2s infinite
+    }
+
+    .whatsapp-float:hover {
+      background: #1ebe5d;
+      color: #fff
+    }
+
+    .telegram-float {
+      bottom: 86px;
+      background: #229ed9;
+      box-shadow: 0 12px 25px rgba(34, 158, 217, .32)
+    }
+
+    .telegram-float:hover {
+      background: #168bc4;
+      color: #fff
+    }
+
+    .review-card {
+      height: 100%;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid #e5e1ff;
+      border-radius: 20px;
+      box-shadow: 0 10px 26px rgba(16, 24, 40, .06)
+    }
+
+    .review-stars {
+      color: #f6b91b;
+      letter-spacing: 2px
+    }
+
+    .faq-section {
+      background: #f7f6ff
+    }
+
+    .faq-section .accordion-item {
+      border: 1px solid #e2defd;
+      border-radius: 14px !important;
+      overflow: hidden;
+      margin-bottom: 12px;
+      box-shadow: 0 6px 16px rgba(16, 24, 40, .04)
+    }
+
+    .faq-section .accordion-button {
+      font-weight: 700
+    }
+
+    .faq-section .accordion-button:not(.collapsed) {
+      background: #eeebff;
+      color: #5948ed;
+      box-shadow: none
+    }
+
+    .policy-card {
+      height: 100%;
+      padding: 22px;
+      border: 1px solid #e5e1ff;
+      border-radius: 18px;
+      background: #fff;
+      transition: .25s
+    }
+
+    .policy-card:hover {
+      transform: translateY(-4px);
+      border-color: #bfb7ff;
+      box-shadow: 0 14px 28px rgba(109, 93, 252, .12)
+    }
+
+    .policy-card i {
+      font-size: 1.45rem;
+      color: var(--primary)
+    }
+
+    footer {
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 12% 0, rgba(109, 93, 252, .3), transparent 34%), radial-gradient(circle at 88% 100%, rgba(47, 165, 255, .14), transparent 30%), linear-gradient(135deg, #080d19, #111a32);
+      color: #aeb6ca;
+      padding: 38px 0 30px;
+      border-top: 1px solid rgba(166, 156, 255, .35);
+      box-shadow: 0 -12px 35px rgba(10, 16, 32, .08)
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      top: -180px;
+      right: 14%;
+      border-radius: 50%;
+      background: rgba(109, 93, 252, .18);
+      filter: blur(20px)
+    }
+
+    footer .container {
+      position: relative;
+      z-index: 1
+    }
+
+    .footer-brand {
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.12rem;
+      letter-spacing: -.02em;
+      text-shadow: 0 0 18px rgba(166, 156, 255, .38)
+    }
+
+    footer .small {
+      color: #bdc5d7
+    }
+
+    footer .text-center {
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, .1)
+    }
+
+    .modal-content {
+      border: 0;
+      border-radius: 22px
+    }
+
+    .form-control,
+    .form-select {
+      padding: 12px;
+      border-radius: 10px
+    }
+
+    #purchaseModal .modal-dialog {
+      max-width: 440px
+    }
+
+    #purchaseModal .modal-header,
+    #purchaseModal .modal-body {
+      padding: 1rem !important
+    }
+
+    #purchaseModal .form-control {
+      padding: 8px 10px;
+      font-size: .86rem;
+      border-radius: 8px
+    }
+
+    #purchaseModal .form-label {
+      font-size: .82rem;
+      margin-bottom: 4px
+    }
+
+    #purchaseModal textarea {
+      min-height: 66px
+    }
+
+    .upi-box {
+      background: #f6f5ff;
+      border: 1px dashed #aaa3ff;
+      border-radius: 14px;
+      padding: 15px
+    }
+
+    #purchaseModal .upi-box {
+      padding: 11px;
+      font-size: .9rem
+    }
+
+    .preview-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 14px;
+      background: #eef0f7
+    }
+
+    .small-muted {
+      font-size: .86rem;
+      color: var(--muted)
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes heroReveal {
+      from {
+        opacity: 0;
+        transform: translateY(26px) scale(.98);
+        filter: blur(6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0)
+      }
+    }
+
+    @keyframes floatIn {
+      0% {
+        opacity: 0;
+        transform: scale(.96) translateY(18px)
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0)
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -400px 0
+      }
+
+      100% {
+        background-position: 400px 0
+      }
+    }
+
+    @keyframes navShine {
+      0% {
+        background-position: 200% 0
+      }
+
+      100% {
+        background-position: -30% 0
+      }
+    }
+
+    @keyframes whatsappPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 12px 25px rgba(37, 211, 102, .36)
+      }
+
+      50% {
+        box-shadow: 0 0 0 12px rgba(37, 211, 102, 0), 0 12px 25px rgba(37, 211, 102, .36)
+      }
+    }
+
+    .hero .container {
+      animation: fadeUp .8s ease both
+    }
+
+    .feature {
+      animation: fadeUp .65s ease both
+    }
+
+    .project-card {
+      animation: floatIn .65s ease both;
+      will-change: transform, box-shadow
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .35), transparent 70%);
+      transform: translateX(-120%);
+      transition: transform .7s ease
+    }
+
+    .project-card {
+      position: relative
+    }
+
+    .project-card:hover::after {
+      transform: translateX(120%)
+    }
+
+    .project-card:hover .project-img {
+      transform: scale(1.035);
+      filter: saturate(1.08)
+    }
+
+    .project-img {
+      transition: .45s ease
+    }
+
+    .btn-main,
+    .btn-outline-dark,
+    .btn-light {
+      transition: .25s ease
+    }
+
+    .btn-main:hover {
+      box-shadow: 0 15px 34px rgba(109, 93, 252, .34);
+      transform: translateY(-2px)
+    }
+
+    .section-title {
+      animation: fadeUp .7s ease both
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important
+      }
+
+      .hero .container>* {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top border-bottom">
+    <div class="container">
+      <a class="navbar-brand brand" href="#"><i class="bi bi-code-slash"></i> Code with JP<span
+          class="text-primary">.</span></a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav"><span
+          class="navbar-toggler-icon"></span></button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto gap-lg-3 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#how">How it works</a></li>
+          <li class="nav-item"><a class="nav-link" href="#websites">Websites</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul><a href="#projects" class="btn btn-main ms-lg-3">View Projects</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <span class="badge badge-soft rounded-pill px-3 py-2 mb-4">Welcome to Code with JP • Student Ready</span>
+      <h1 class="mb-4">Professional<br><span style="color:#a69cff">Managements Projects.</span></h1>
+      <p class="mb-4">Browse ready-made management projects with clean interfaces and source code. Preview the project,
+        choose one, contact me and get the ZIP after payment confirmation.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong class="count-up" data-target="15" data-suffix="+">0</strong><span>Management
+            Projects</span></div>
+        <div class="hero-stat"><strong class="count-up" data-target="5" data-suffix="+">0</strong><span>Happy
+            Customers</span></div>
+      </div>
+      <div class="d-flex flex-wrap gap-3"><a href="#projects" class="btn btn-main">Explore Projects <i
+            class="bi bi-arrow-right ms-1"></i></a><a href="#how" class="btn btn-outline-light px-4 py-3 rounded-3">How
+          it works</a></div>
+    </div>
+  </header>
+
+  <section class="section pb-4">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature"><i class="bi bi-window-stack"></i>
+            <h5 class="mt-3 fw-bold">Project Preview</h5>
+            <p class="small-muted mb-0">Add your own live Google-hosted image links and show students a visual preview
+              before purchase.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature"><i class="bi bi-code-square"></i>
+            <h5 class="mt-3 fw-bold">Source Code</h5>
+            <p class="small-muted mb-0">Offer organized project ZIP files for students to study and customize.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature"><i class="bi bi-envelope-check"></i>
+            <h5 class="mt-3 fw-bold">Email Delivery</h5>
+            <p class="small-muted mb-0">Collect the student's email so you can send the ZIP after payment confirmation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section pt-55">
+    <div class="container">
+      <div class="text-center mb-4 projects-heading"><span class="text-primary fw-bold">CODE WITH JP • MANAGEMENT
+          PROJECT STORE</span>
+        <h2 class="section-title mt-2">Featured Management Projects</h2>
+        <p class="section-sub">All projects are management-system projects. These are starter listings — you can add
+          unlimited projects later.</p>
+        <div class="mt-4 technologies-panel">
+          <div class="text-uppercase fw-bold text-primary mb-2 technology-label"><i class="bi bi-cpu-fill"></i>
+            Technologies</div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Bootstrap</span>
+            <span class="tag">React JS</span><span class="tag">MongoDB</span><span class="tag">SQL</span>
+            <span class="tag">Node JS</span><span class="tag">Express JS</span>
+          </div>
+        </div>
+      </div>
+      <div class="filter-bar mb-4">
+        <div class="row g-2 align-items-center">
+          <div class="col-12">
+            <div class="input-group"><span class="input-group-text bg-white"><i class="bi bi-search"></i></span><input
+                id="searchBox" class="form-control border-start-0" placeholder="Search management projects..."
+                oninput="filterProjects()"></div>
+          </div>
+        </div>
+      </div>
+      <div id="projectGrid" class="row g-4"></div>
+      <div class="text-center mt-4"><span class="small-muted"><i class="bi bi-plus-circle me-1"></i>You can add more
+          projects anytime by adding another item to the <code>projects</code> array.</span></div>
+    </div>
+  </section>
+
+  <section class="section pt-2">
+    <div class="container">
+      <div class="custom-project">
+        <div class="row align-items-center g-4">
+          <div class="col-md-auto text-center"><i class="bi bi-code-square"></i></div>
+          <div class="col-md"><span class="text-primary fw-bold">CAN'T FIND YOUR PROJECT?</span>
+            <h3 class="fw-bold mt-2 mb-2">Get a custom management project made for you.</h3>
+            <p class="section-sub mb-0">Tell us your college requirements, features and preferred technology. We can
+              create a project tailored to your needs.</p>
+          </div>
+          <div class="col-md-auto"><button class="btn btn-main"
+              onclick="openPurchase('Custom Management Project','')">Request Custom Project</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section how">
+    <div class="container">
+      <div class="text-center mb-5"><span class="text-primary fw-bold">SIMPLE PROCESS</span>
+        <h2 class="section-title mt-2">How to purchase</h2>
+        <p class="section-sub">A simple manual-payment workflow.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="d-flex gap-3">
+            <div class="step-num">1</div>
+            <div>
+              <h6 class="fw-bold">Preview</h6>
+              <p class="small-muted">Check the project preview.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="d-flex gap-3">
+            <div class="step-num">2</div>
+            <div>
+              <h6 class="fw-bold">Contact</h6>
+              <p class="small-muted">Send project name + email.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="d-flex gap-3">
+            <div class="step-num">3</div>
+            <div>
+              <h6 class="fw-bold">Pay UPI</h6>
+              <p class="small-muted">Pay to <b>jp@kotak811</b>.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="d-flex gap-3">
+            <div class="step-num">4</div>
+            <div>
+              <h6 class="fw-bold">Receive ZIP</h6>
+              <p class="small-muted">ZIP is sent by email.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="websites" class="section web-service">
+    <div class="container">
+      <div class="row align-items-center g-5 mb-5">
+        <div class="col-lg-7"><span class="badge badge-soft rounded-pill px-3 py-2">CUSTOM WEBSITE / PORTFOLIO</span>
+          <h2 class="section-title mt-3">Need your own website or portfolio?</h2>
+          <p class="section-sub mb-4">Get a modern, responsive website that presents your skills, projects, business or
+            personal brand professionally.</p><button class="btn btn-main rounded-3"
+            onclick="openPurchase('Custom Website / Portfolio','')">Request a Website <i
+              class="bi bi-arrow-right ms-1"></i></button>
+        </div>
+        <div class="col-lg-5">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="web-service-card"><i class="bi bi-person-badge"></i>
+                <h6 class="fw-bold mt-3">Portfolio Website</h6>
+                <p class="small text-white-50 mb-0">Showcase skills, projects, resume and contact details.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="web-service-card"><i class="bi bi-window-stack"></i>
+                <h6 class="fw-bold mt-3">Business Website</h6>
+                <p class="small text-white-50 mb-0">Build a clear online presence for your service or business.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mb-4"><span class="text-white-50 fw-bold small">SIMPLE 4-STEP PROCESS</span>
+        <h3 class="fw-bold mt-2">How your website gets built</h3>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-3">
+          <div class="web-step">
+            <div class="web-step-number">01</div>
+            <h6 class="fw-bold">Share your idea</h6>
+            <p class="small text-white-50 mb-0">Tell us your purpose, pages and design preferences.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="web-step">
+            <div class="web-step-number">02</div>
+            <h6 class="fw-bold">Plan & quote</h6>
+            <p class="small text-white-50 mb-0">We confirm features, timeline and project cost.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="web-step">
+            <div class="web-step-number">03</div>
+            <h6 class="fw-bold">Design & build</h6>
+            <p class="small text-white-50 mb-0">Your responsive website is designed and developed.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="web-step">
+            <div class="web-step-number">04</div>
+            <h6 class="fw-bold">Review & launch</h6>
+            <p class="small text-white-50 mb-0">Review the work, request changes and receive delivery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-box">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7"><span class="badge badge-soft rounded-pill px-3 py-2">ORDER / SUPPORT</span>
+            <h2 class="fw-bold mt-3">Need a management project?</h2>
+            <p class="mb-0 text-white-50">Send the project name and your email. For quick contact, call or WhatsApp: <b
+                class="text-white">+91 91454 97035</b>.</p>
+          </div>
+          <div class="col-lg-5 text-lg-end d-flex flex-wrap justify-content-lg-end gap-2"><button
+              class="btn btn-light rounded-3 fw-bold" onclick="openPurchase('','')"><i
+                class="bi bi-send me-2"></i>Contact for Purchase</button><button
+              class="btn btn-success rounded-3 fw-bold" onclick="openWhatsApp()"><i
+                class="bi bi-whatsapp me-2"></i>WhatsApp</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="section">
+    <div class="container">
+      <div class="text-center mb-5"><span class="text-primary fw-bold">STUDENT FEEDBACK</span>
+        <h2 class="section-title mt-2">Trusted by students</h2>
+        <p class="section-sub">Add verified feedback from students after project delivery.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <article class="review-card">
+            <div class="review-stars mb-3">★★★★★</div>
+            <p class="mb-4">“Replace this with Ishwar's genuine review after receiving approval.”</p>
+            <div class="fw-bold">Ishwar Patil</div>
+            <div class="small-muted">Course / College</div>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="review-card">
+            <div class="review-stars mb-3">★★★★★</div>
+            <p class="mb-4">“Add Tushal's feedback about source-code quality, support and delivery.”</p>
+            <div class="fw-bold">Tushal Mali</div>
+            <div class="small-muted">Course / College</div>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="review-card">
+            <div class="review-stars mb-3">★★★★★</div>
+            <p class="mb-4">“Use a real, permission-based customer review here to build trust.”</p>
+            <div class="fw-bold">Bhushan Shinde</div>
+            <div class="small-muted">Course / College</div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section faq-section">
+    <div class="container">
+      <div class="text-center mb-5"><span class="text-primary fw-bold">HELP CENTER</span>
+        <h2 class="section-title mt-2">Frequently asked questions</h2>
+        <p class="section-sub">Everything students usually want to know before purchasing.</p>
+      </div>
+      <div class="accordion mx-auto" style="max-width:850px" id="faqAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
+              data-bs-target="#faqOne">When will I receive the ZIP file?</button></h2>
+          <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">After payment confirmation, the ZIP file is sent to your provided email address.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse"
+              data-bs-target="#faqTwo">Can I edit the source code?</button></h2>
+          <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Yes. The project source code is provided so you can study, customize and use it
+              for your college work.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse"
+              data-bs-target="#faqThree">How do I share payment proof?</button></h2>
+          <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Select your payment screenshot in the order form, then send it manually through
+              WhatsApp along with your name and project name.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse"
+              data-bs-target="#faqFour">Can you make a custom project or website?</button></h2>
+          <div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">Yes. Send your requirements through the custom project or website request button
+              for a quote and timeline.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="policies" class="section">
+    <div class="container">
+      <div class="text-center mb-5"><span class="text-primary fw-bold">CLEAR & TRANSPARENT</span>
+        <h2 class="section-title mt-2">Our policies</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <article class="policy-card"><i class="bi bi-truck"></i>
+            <h5 class="fw-bold mt-3">Delivery Policy</h5>
+            <p class="small-muted mb-0">Digital ZIP files are delivered by email after payment confirmation.</p>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="policy-card"><i class="bi bi-arrow-repeat"></i>
+            <h5 class="fw-bold mt-3">Refund Policy</h5>
+            <p class="small-muted mb-0">Please confirm project requirements before payment. Custom projects are not
+              eligible for refund once work begins.</p>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="policy-card"><i class="bi bi-shield-lock"></i>
+            <h5 class="fw-bold mt-3">Privacy Policy</h5>
+            <p class="small-muted mb-0">Your name, email and mobile number are used only to process your enquiry and
+              delivery.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+        <div><span class="footer-brand"> Code with JP.</span>
+          <div class="small mt-1">Management Project Store</div>
+        </div>
+        <div class="small">UPI: jp@kotak811 &nbsp; • &nbsp; Contact: +91 91454 97035</div>
+      </div>
+      <div class="small text-center mt-3">© 2026 Code with JP. All rights reserved.</div>
+    </div>
+  </footer>
+
+
+  <button class="telegram-float" onclick="openTelegram()" aria-label="Chat on Telegram" title="Chat on Telegram"><i
+      class="bi bi-telegram"></i></button><button class="whatsapp-float" onclick="openWhatsApp()"
+    aria-label="Chat on WhatsApp" title="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></button>
+
+  <div class="modal fade" id="descriptionModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 px-4 pt-4">
+          <div>
+            <h4 id="descTitle" class="fw-bold mb-1"></h4>
+            <div id="descMeta" class="small-muted"></div>
+          </div><button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body px-4 pb-4">
+          <p id="descText" class="text-secondary"></p>
+          <h6 class="fw-bold mt-4">Technologies Used</h6>
+          <div class="d-flex flex-wrap gap-2 mt-2"><span class="tag">HTML</span><span class="tag">CSS</span><span
+              class="tag">Bootstrap</span><span class="tag">React JS</span><span class="tag">MongoDB</span><span
+              class="tag">SQL</span><span class="tag">Node JS</span><span class="tag">Express JS</span></div>
+          <div class="d-flex justify-content-between align-items-center mt-4"><span id="descPrice"
+              class="price"></span><button class="btn btn-main" id="descBuy">Purchase this project</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="previewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 px-4 pt-4">
+          <div>
+            <h4 id="previewTitle" class="fw-bold mb-1"></h4>
+            <div id="previewMeta" class="small-muted"></div>
+          </div><button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body px-4 pb-4"><img id="previewImage" class="preview-img" alt="Project preview">
+          <p id="previewDesc" class="mt-3 text-secondary"></p>
+          <div class="d-flex justify-content-between align-items-center"><span id="previewPrice"
+              class="price"></span><button class="btn btn-main" id="previewBuy">Purchase this project</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="purchaseModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 px-4 pt-4">
+          <div>
+            <h4 class="fw-bold mb-1">Purchase Project</h4>
+            <div class="small-muted">Enter your details to send an order request.</div>
+          </div><button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body px-4 pb-4">
+          <form onsubmit="sendOrder(event)">
+            <div class="row g-3">
+              <div class="col-md-6"><label class="form-label fw-semibold">Project</label><input id="projectName"
+                  class="form-control mb-1" readonly></div>
+              <div class="col-md-6"><label class="form-label fw-semibold">Your Name</label><input id="studentName"
+                  class="form-control mb-1" required placeholder="Enter your name"></div>
+            </div>
+            <div class="row g-3 mt-1">
+              <div class="col-md-6"><label class="form-label fw-semibold">Email for ZIP delivery</label><input
+                  id="studentEmail" type="email" class="form-control mb-1" required placeholder="you@example.com"></div>
+              <div class="col-md-6"><label class="form-label fw-semibold">Mobile Number</label><input id="studentMobile"
+                  type="tel" class="form-control mb-1" required placeholder="10-digit mobile number"></div>
+            </div>
+            <label class="form-label fw-semibold">Message</label><textarea id="studentMessage" class="form-control mb-3"
+              rows="2" placeholder="Any requirements?"></textarea>
+            <label class="form-label fw-semibold">Payment Screenshot</label><input id="paymentProof" type="file"
+              accept="image/*" class="form-control mb-1" onchange="updateProofLabel()">
+            <div id="paymentProofNote" class="small-muted mb-3">Select the screenshot, then share it manually on
+              WhatsApp after submitting your order.</div>
+            <div class="upi-box mb-3">
+              <div class="small-muted">UPI payment ID</div>
+              <div class="fw-bold fs-5">jp@kotak811</div>
+              <div class="small-muted mt-1">After payment, send the transaction/reference details as requested.</div>
+            </div>
+            <button class="btn btn-main w-100" type="submit">Send Order Request <i
+                class="bi bi-arrow-right ms-1"></i></button>
+            <p class="small-muted text-center mt-3 mb-0">The button opens the student's email app with the order
+              details.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const projects = [
+        ["1", "College Management System", "College", "₹1,499", "Manage student records, courses, departments, fees and administration.", "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80"],
+        ["2", "Hospital Management System", "Healthcare", "₹1,799", "Manage patients, doctors, appointments, rooms, billing and records.", "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1200&q=80"],
+        ["3", "Employee Management System", "HR", "₹1,299", "Manage employees, departments, attendance, roles and HR records.", "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"],
+        ["4", "Inventory Management System", "Inventory", "₹1,199", "Track products, stock, suppliers, purchases and inventory reports.", "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80"],
+        ["5", "Hotel Management System", "Hotel", "₹1,599", "Manage rooms, bookings, guests, check-in, check-out and billing.", "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"],
+        ["6", "Library Management System", "College", "₹999", "Manage books, members, issue-return records, fines and availability.", "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1200&q=80"],
+        ["7", "CRM Management System", "Business", "₹1,499", "Manage customers, leads, follow-ups, sales activities and reports.", "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80"],
+        ["8", "Project Management System", "Business", "₹1,399", "Manage teams, tasks, deadlines, project status and progress tracking.", "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80"],
+        ["9", "Restaurant Management System", "Business", "₹1,299", "Manage menus, tables, orders, customers, staff and billing.", "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80"],
+        ["10", "Vehicle Management System", "Business", "₹1,099", "Manage vehicles, drivers, service schedules, trips and maintenance records.", "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"],
+        ["11", "Hostel Management System", "College", "₹1,299", "Manage student hostel rooms, allocations, fees, visitors, complaints and attendance.", "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=1200&q=80"],
+        ["12", "Examination Management System", "College", "₹1,399", "Manage exam schedules, student registrations, marks, results and report cards.", "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80"]
+      ];
+      // IMPORTANT: Replace each image URL with your own publicly accessible Google-hosted image URL. Add more project objects to this array whenever you want.
+      function salePriceMarkup(price) { const amount = Number(String(price).replace(/[^0-9]/g, "")); const original = Math.ceil((amount / 0.65) / 100) * 100 - 1; return `<div class="sale-price"><span class="price">${price}</span><span class="old-price">₹${original.toLocaleString("en-IN")}</span><span class="discount-badge">35% OFF</span></div>`; }
+      function render(list = projects) {
+        const grid = document.getElementById("projectGrid");
+        grid.innerHTML = list.map(p => `<div class="col-sm-6 col-lg-4 col-xl-3"><article class="project-card"><img src="${p[5]}" class="project-img" alt="${p[1]}" onerror="this.src='https://placehold.co/1200x700/171d35/ffffff?text=Add+Your+Image'"><div class="project-body"><h4 class="fw-bold mb-2">${p[1]}</h4><div class="mb-3">${salePriceMarkup(p[3])}</div><div class="d-flex flex-wrap gap-2 mt-2"><button class="btn btn-outline-secondary btn-sm px-2" onclick="previewProject('${p[0]}')" aria-label="Preview ${p[1]}" title="Preview"><i class="bi bi-eye"></i></button><button class="btn btn-outline-dark btn-sm px-2" onclick="viewDescription('${p[0]}')">Desc</button><button class="btn btn-outline-primary btn-sm px-2" onclick="openDemo('${p[0]}')" title="Request Live Demo">Demo</button><button class="btn btn-main btn-sm px-3" onclick="openPurchase('${p[1]} — ${p[3]}','')">Buy</button></div></div></article></div>`).join("");
+      }
+      function filterProjects() {
+        const q = document.getElementById("searchBox").value.toLowerCase();
+        render(projects.filter(p => p[1].toLowerCase().includes(q) || p[4].toLowerCase().includes(q)));
+      }
+      const previewModal = new bootstrap.Modal(document.getElementById("previewModal")), descriptionModal = new bootstrap.Modal(document.getElementById("descriptionModal")), purchaseModal = new bootstrap.Modal(document.getElementById("purchaseModal"));
+      const WHATSAPP_NUMBER = "919145497035", TELEGRAM_USERNAME = "your_telegram_username"; // Replace these with your own contact details.
+
+      function openWhatsApp(message = "Hi Code with JP, I need help with a project.") { window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener"); }
+      function openTelegram() { window.open(`https://t.me/${TELEGRAM_USERNAME}`, "_blank", "noopener"); }
+      function openDemo(id) { const p = projects.find(x => x[0] === id); if (!p) return; if (p[6]) { window.open(p[6], "_blank", "noopener"); return; } openWhatsApp(`Hi Code with JP, I would like a live demo of ${p[1]}.`); }
+      function updateProofLabel() { const file = document.getElementById("paymentProof").files[0]; document.getElementById("paymentProofNote").textContent = file ? `Selected: ${file.name}. Please send this screenshot on WhatsApp after submitting.` : "Select the screenshot, then share it manually on WhatsApp after submitting your order."; }
+
+      const navbar = document.querySelector(".navbar"), hero = document.querySelector(".hero");
+      function updateNavbarColor() { navbar.classList.toggle("scrolled", window.scrollY > hero.offsetHeight - 100); }
+      window.addEventListener("scroll", updateNavbarColor); updateNavbarColor();
+
+      window.addEventListener("load", () => { document.querySelectorAll(".count-up").forEach(el => { const target = Number(el.dataset.target), suffix = el.dataset.suffix || "", start = performance.now(), duration = 1100; function animate(now) { const progress = Math.min((now - start) / duration, 1); el.textContent = Math.floor(target * (1 - Math.pow(1 - progress, 3))) + suffix; if (progress < 1) requestAnimationFrame(animate); } requestAnimationFrame(animate); }); });
+
+      function viewDescription(id) {
+        const p = projects.find(x => x[0] === id); if (!p) return;
+        document.getElementById("descTitle").textContent = p[1];
+        document.getElementById("descMeta").textContent = p[2] + " • Management Project";
+        document.getElementById("descText").textContent = p[4];
+        document.getElementById("descPrice").textContent = p[3];
+        document.getElementById("descBuy").onclick = () => { descriptionModal.hide(); openPurchase(p[1] + " — " + p[3], ""); };
+        descriptionModal.show();
+      }
+
+      function previewProject(id) {
+        const p = projects.find(x => x[0] === id); if (!p) return;
+        document.getElementById("previewTitle").textContent = p[1]; document.getElementById("previewMeta").textContent = p[2] + " • Student Project";
+        document.getElementById("previewImage").src = p[5]; document.getElementById("previewDesc").textContent = p[4]; document.getElementById("previewPrice").textContent = p[3];
+        document.getElementById("previewBuy").onclick = () => { previewModal.hide(); openPurchase(p[1] + " — " + p[3], ""); }; previewModal.show();
+      }
+      function openPurchase(project, price) { document.getElementById("projectName").value = project; purchaseModal.show(); }
+      function sendOrder(e) {
+        e.preventDefault();
+        const project = document.getElementById("projectName").value || "Management Project Inquiry";
+        const name = document.getElementById("studentName").value, email = document.getElementById("studentEmail").value, mobile = document.getElementById("studentMobile").value, msg = document.getElementById("studentMessage").value, proof = document.getElementById("paymentProof").files[0];
+        const body = `Hello, I want to purchase: ${project}%0A%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMobile: ${encodeURIComponent(mobile)}%0AMessage: ${encodeURIComponent(msg)}%0APayment screenshot selected: ${proof ? encodeURIComponent(proof.name) : "No"}%0A%0AUPI ID: jp@kotak811`;
+        window.location.href = `mailto:YOUR-EMAIL@example.com?subject=${encodeURIComponent("Project Purchase - " + project)}&body=${body}`;
+      }
+      render();
+    </script>
+</body>
+
+</html>
